@@ -5,4 +5,5 @@ urlpatterns = [
     # Routes will be added here
     path('', views.Home.as_view(), name='home'),
     path('about/', views.about, name='about'),
+    path('trips/', views.trip_index, name='trip-index'),
 ]

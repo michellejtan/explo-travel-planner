@@ -1,0 +1,47 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{% static 'css/home.css' %}"
+/>
+{% endblock %}
+
+{% block content %}
+
+
+<section class="logo-container">
+  <div class="trip-container">
+    <img
+      src=""
+      alt="Explo The travel planner"
+    />
+  </div>
+  <img
+    src=""
+    alt="Text reads: Explo"
+  />
+</section>
+
+{% if not user.is_authenticated %}
+
+  <section>
+    <form action="{% url 'home' %}" method="post" class="login">
+      <h1>Login</h1>
+      {% csrf_token %} {{ form.as_p }}
+      <input type="hidden" name="next" value="{{ next }}" />
+      <button type="submit" class="btn submit">Login</button>
+    </form>
+  </section>
+{% else %}
+  <section class="page-header">
+    <h1>Welcome back </h1>
+    <h2>
+        Explo Our travel planning app is your all-in-one companion for stress-free adventures. Effortlessly organize your trips—from destinations and dates to detailed daily itineraries and packing lists. Whether you're jet-setting for business or exploring for fun, schedule everything from flights and check-ins to events and meals with ease. Stay prepared with smart packing categories, so you never forget the essentials. Designed for simplicity, built for travelers—this app keeps your journey smooth, memorable, and perfectly planned.
+
+
+    </h2>
+    
+  </section>
+{% endif %}
+
+
+{% endblock %}

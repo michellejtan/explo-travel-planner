@@ -1,10 +1,13 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.contrib.auth.views import LoginView
 
 
 # Create your views here.
-def home(request):
-    return render(request, 'about.html')  #  REMOVE LATER
+class Home(LoginView):
+    template_name = 'home.html'
 
 def about(request):
-    return render(request, 'about.html')
+     contact_details = 'you can reach support at support@catcollector.com' 
+     return render(request, 'about.html', {
+        'contact': contact_details
+    })

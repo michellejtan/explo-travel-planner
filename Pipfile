@@ -9,6 +9,7 @@ whitenoise = "*"
 gunicorn = "*"
 dj-database-url = "*"
 django = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 

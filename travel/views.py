@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.views import LoginView
 from .models import Trip, Itinerary, PackingItem
+from datetime import date
+
 
 
 # Create your views here.
@@ -15,6 +17,10 @@ def about(request):
 
 def trip_index(request):
     trips = Trip.objects.filter(user=request.user)
+    today = date.today()
+    upcoming_trips = trips.filter(end_date__gte=today).order_by('start_date')
+    past_trips = trips.filter(end_date__lt=today).order_by('-start_date')
     return render(request, 'trips/index.html', {
-        'trips': trips
+        'upcoming_trips': upcoming_trips,
+        'past_trips': past_trips,
     })

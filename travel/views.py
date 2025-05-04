@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.views import LoginView
 from .models import Trip, Itinerary, PackingItem
 from datetime import date
@@ -43,3 +43,10 @@ class TripCreate(CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
+class TripUpdate(UpdateView):
+    model = Trip
+    fields = ['name', 'destination', 'start_date', 'end_date', 'notes']
+
+class TripDelete(DeleteView):
+    model = Trip
+    success_url = '/trips/'

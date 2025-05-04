@@ -1,0 +1,88 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{% static 'css/trips/trip-index.css' %}"
+/>
+{% endblock %} {% block content %}
+
+<section class="page-header">
+  <h1>Trip List</h1>
+  <img
+    src=""
+    alt=""
+  />
+  <img
+    src=""
+    alt=""
+  />
+  <img
+    src=""
+    alt=""
+  />
+  <img
+    src=""
+    alt=""
+  />
+</section>
+
+<h1>Upcoming Trips</h1>
+
+<section class="card-container">
+    {% if upcoming_trips %}
+        {% for trip in upcoming_trips %}
+       
+        <div class="card">
+            <a href="/trips/{{ trip.id }}">
+            <div class="card-content">
+                <div class="card-img-container">
+                <img
+                src=""
+                alt=""
+                />
+        </div>
+        <h2 class="card-title">{{ trip.name }}</h2>
+        <p><strong>Destination:</strong> {{ trip.destination }}</p>
+        <p>{{ trip.start_date }} to {{ trip.end_date }}</p>
+        </div>
+    </a>
+    </div>
+ 
+        {% endfor %}
+    {% else %}
+        <p>No upcoming trips.</p>
+    {% endif %}
+
+</section>
+
+
+<h1>Past Trips</h1>
+
+<section class="card-container">
+    {% if past_trips %}
+        {% for trip in past_trips %}
+        
+        <div class="card">
+            <a href="/trips/{{ trip.id }}">
+            <div class="card-content">
+                <div class="card-img-container">
+                <img
+                src=""
+                alt=""
+                />
+            </div>
+
+        <h2 class="card-title">{{ trip.name }}</h2>
+        <p><strong>Destination:</strong> {{ trip.destination }}</p>
+        <p>{{ trip.start_date }} to {{ trip.end_date }}</p>
+        </div>
+    </a>
+    </div>
+    
+        {% endfor %}
+    {% else %}
+        <p>No past trips yet.</p>
+    {% endif %}
+
+</section>
+
+{% endblock %}

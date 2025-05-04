@@ -19,8 +19,18 @@ def trip_index(request):
     trips = Trip.objects.filter(user=request.user)
     today = date.today()
     upcoming_trips = trips.filter(end_date__gte=today).order_by('start_date')
+    current_trips = trips.filter(start_date__lte=today, end_date__gte=today).order_by('start_date')
     past_trips = trips.filter(end_date__lt=today).order_by('-start_date')
     return render(request, 'trips/index.html', {
         'upcoming_trips': upcoming_trips,
         'past_trips': past_trips,
+        'current_trips': current_trips,
     })
+
+def trip_detail(request, trip_id):
+    trip = Trip.objects.get(id=trip_id)
+    return render(request, 'trips/detail.html', {
+        'trip': trip,
+        'trip_status': trip.status,
+    })
+

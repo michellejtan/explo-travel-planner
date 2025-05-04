@@ -25,6 +25,36 @@
   />
 </section>
 
+<h1>Current Trips</h1>
+
+<section class="card-container">
+    {% if current_trips %}
+        {% for trip in current_trips %}
+        
+        <div class="card">
+            <a href="/trips/{{ trip.id }}">
+            <div class="card-content">
+                <div class="card-img-container">
+                <img
+                src=""
+                alt=""
+                />
+            </div>
+
+        <h2 class="card-title">{{ trip.name }}</h2>
+        <p><strong>Destination:</strong> {{ trip.destination }}</p>
+        <p>{{ trip.start_date }} to {{ trip.end_date }}</p>
+        </div>
+    </a>
+    </div>
+    
+        {% endfor %}
+    {% else %}
+        <h2>No current trips.</h2>
+    {% endif %}
+
+</section>
+
 <h1>Upcoming Trips</h1>
 
 <section class="card-container">
@@ -50,6 +80,7 @@
         {% endfor %}
     {% else %}
         <p>No upcoming trips.</p>
+        {% comment %} add a  button to create new trip {% endcomment %}
     {% endif %}
 
 </section>

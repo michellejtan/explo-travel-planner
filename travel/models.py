@@ -1,3 +1,4 @@
+from datetime import date
 from django.db import models
 from django.urls import reverse
 from django.core.exceptions import ValidationError
@@ -89,6 +90,15 @@ class Trip(models.Model):
     @property
     def duration_days(self):
         return (self.end_date - self.start_date).days + 1
+    
+    @property
+    def status(self):
+        today = date.today()
+        if self.end_date < today:
+            return 'past'
+        elif self.start_date > today:
+            return 'upcoming'
+        return 'current'
     
     def __str__(self):
         return f"{self.name} to {self.destination}"

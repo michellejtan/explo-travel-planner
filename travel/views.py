@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic.edit import CreateView
 from django.contrib.auth.views import LoginView
 from .models import Trip, Itinerary, PackingItem
 from datetime import date
@@ -33,4 +34,12 @@ def trip_detail(request, trip_id):
         'trip': trip,
         'trip_status': trip.status,
     })
+
+class TripCreate(CreateView):
+    model = Trip
+    fields = ['name', 'destination', 'start_date', 'end_date', 'notes']
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 

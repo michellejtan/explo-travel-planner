@@ -129,10 +129,12 @@ class Itinerary(models.Model):
     description = models.TextField('Description', blank=True)
     
     def clean(self):
-        if self.trip and self.date:
-            if self.date < self.trip.start_date or self.date > self.trip.end_date:
+        if self.trip_id and self.date: #accesses self.trip before you've assigned it in the view — during form.is_valid()
+            # self.trip_id ensures the foreign key is set  aka assigned (avoids premature access)
+            trip = self.trip # improve readability
+            if self.date < trip.start_date or self.date > trip.end_date:
                 raise ValidationError("Itinerary date must be within the trip's start and end dates.")
-            
+    
     def __str__(self):
         return f"{self.date} - {self.activity}"
     

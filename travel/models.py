@@ -104,7 +104,7 @@ class Trip(models.Model):
         return f"{self.name} to {self.destination}"
 
     def get_absolute_url(self):
-        return reverse('trip_detail', kwargs={'trip_id': self.id})
+        return reverse('trip-detail', kwargs={'trip_id': self.id})
     
     def clean(self):
         if self.start_date and self.end_date and self.start_date > self.end_date:

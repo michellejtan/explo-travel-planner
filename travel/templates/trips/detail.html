@@ -24,9 +24,14 @@
         {% if trip.notes %}
             <h4>Notes</h4>
             <p>{{ trip.notes }}</p>
-        {% endif %}
-
+        {% endif %}       
     </div>
-
+    
+    <div class="trip-actions">
+        <a href="{% url 'trip-update' trip.id %}" class="btn warn">Edit</a>
+        <a href="{% url 'trip-delete' trip.id %}" class="btn danger">Delete</a>
+    </div>
+    
+</section>
 
 {% endblock %}

@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.views import LoginView
 from .models import Trip, Itinerary, PackingItem
+from .forms import ItineraryForm
 from datetime import date
 
 
@@ -30,10 +31,23 @@ def trip_index(request):
 
 def trip_detail(request, trip_id):
     trip = Trip.objects.get(id=trip_id)
+    itinerary_form = ItineraryForm()
+
     return render(request, 'trips/detail.html', {
         'trip': trip,
         'trip_status': trip.status,
+        'itinerary_form': itinerary_form,
     })
+
+def add_itinerary(request, trip_id):
+    form = ItineraryForm(request.POST)
+    
+    if form.is_valid():
+        new_itinerary = form.save(commit=False) 
+        new_itinerary.trip_id = trip_id 
+        new_itinerary.save() 
+        
+    return redirect('trip-detail', trip_id)
 
 class TripCreate(CreateView):
     model = Trip

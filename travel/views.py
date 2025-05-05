@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.views import LoginView
 from .models import Trip, Itinerary, PackingItem
@@ -64,3 +65,16 @@ class TripUpdate(UpdateView):
 class TripDelete(DeleteView):
     model = Trip
     success_url = '/trips/'
+
+class ItineraryUpdate(UpdateView):
+    model = Itinerary
+    fields = ['date', 'time', 'type', 'activity', 'address', 'description']    
+    
+    def get_success_url(self):
+        return reverse_lazy('trip-detail', kwargs={'trip_id': self.object.trip.id})
+    
+class ItineraryDelete(DeleteView):
+    model = Itinerary
+    
+    def get_success_url(self):
+        return reverse_lazy('trip-detail', kwargs={'trip_id': self.object.trip.id})

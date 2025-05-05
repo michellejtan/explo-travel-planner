@@ -15,4 +15,6 @@ urlpatterns = [
         views.add_itinerary, 
         name='add-itinerary'
     ),
+    path('itineraries/<int:pk>/update/', views.ItineraryUpdate.as_view(), name='itinerary-update'),
+    path('itineraries/<int:pk>/delete/', views.ItineraryDelete.as_view(), name='itinerary-delete'),
 ]

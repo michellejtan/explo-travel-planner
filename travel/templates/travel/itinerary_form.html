@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}" />
+{% endblock %}
+{% block content %}
+<div class="page-header">
+    {% if object %}
+    <h1>Edit {{object.activity}}</h1>
+    {% else %}
+    <h1>Add a itinerary</h1>
+    {% endif %}
+    <img src="" alt="" />
+</div>
+<form action="" method="post" class="form-container" autocomplete="off">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <a href="{% url 'trip-detail' trip_id=object.trip.id %}" class="btn secondary"> Cancel </a>
+    <button type="submit" class="btn submit">Submit!</button>
+</form>
+
+{% endblock %}

@@ -1,7 +1,7 @@
 {% extends 'base.html' %} 
 {% load static %} 
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/trips/trips-detail.css' %}" />
+<link rel="stylesheet" href="{% static 'css/trips/trip-detail.css' %}" />
 {% endblock %} 
 {% block content %}
 <section class="trip-container">
@@ -14,7 +14,7 @@
         <h3> {{ trip.start_date }} to {{ trip.end_date }} ({{ trip.duration_days }} days)</h3>
 
         {% if trip_status == 'past' %}
-            <h3 style="color: gray;">This trip has already ended!</h4>
+            <h3 style="color: gray;">This trip has already ended!</h3>
         {% elif trip_status == 'current' %}
             <h3 style="color: green;">This trip is currently in progress!</h3>
         {% elif trip_status == 'upcoming' %}
@@ -33,5 +33,82 @@
     </div>
     
 </section>
+
+
+<div class="itineraries-packitem-container">
+    <section class="itineraries">
+      <div class="subsection-title">
+        <h2>Itinerary</h2>
+        <img
+          src=""
+          alt=""
+        />
+        <img 
+            src="" 
+            alt=""
+        />
+        <img
+          src=""
+          alt=""
+        />
+      </div>
+
+      <h3>Add Itinerary</h3>
+       <form
+       action="{% url 'add-itinerary' trip.id %}"
+       method="post" 
+       class="subsection-content" 
+       autocomplete="off"
+       >
+        {% csrf_token %}
+        {{itinerary_form.as_p }}
+        <button type="submit" class="btn submit">Add Itinerary</button>
+       </form>
+
+
+    <h3>Itinerary</h3>
+    {% if trip.itinerary_set.all.count %}
+    <div class="table-scroll">
+
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time of Day</th>
+            <th>Type</th>
+            <th>Activity</th>
+            <th>Address</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for itinerary in trip.itinerary_set.all %}
+            <tr>
+              <td>{{itinerary.date}}</td>
+              <td>{{itinerary.time|default:"—"}}</td>
+              <td>{{itinerary.get_type_display}}</td>
+              <td>{{itinerary.activity }}</td>
+              <td>{{ itinerary.address|default:"—" }}</td>
+              <td>{{ itinerary.description|linebreaksbr|default:"—" }}</td>
+              <td>
+                <div class="trip-actions">
+                    <a href="{% url 'itinerary-update' itinerary.id %}" class="btn warn">Edit</a>
+                    <a href="{% url 'itinerary-delete' itinerary.id %}" class="btn danger">Delete</a>
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+      <div class="subsection-content">
+        <p>⚠️ {{trip.name}} has no itinerary added yet!</p>
+      </div>
+    {% endif %}
+    </section>
+</div>
+
 
 {% endblock %}

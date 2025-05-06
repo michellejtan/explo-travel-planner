@@ -72,7 +72,7 @@ class PackingItem(models.Model):
         return f"{self.category}: {self.quantity} X {self.name}"
 
     def get_absolute_url(self):
-        return reverse('packing-detail', kwargs={'pk': self.trip.id})
+        return reverse('packing-detail', kwargs={'pk': self.id})
     
     class Meta:
         ordering = ['category', 'name']

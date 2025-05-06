@@ -18,5 +18,9 @@ urlpatterns = [
     path('itineraries/<int:pk>/update/', views.ItineraryUpdate.as_view(), name='itinerary-update'),
     path('itineraries/<int:pk>/delete/', views.ItineraryDelete.as_view(), name='itinerary-delete'),
     path('packitems/create/', views.PackItemCreate.as_view(), name='packitem-create'),
+    path('packitems/<int:pk>/', views.PackingItemDetail.as_view(), name='packing-detail'),
+    path('packitems/', views.PackingItemList.as_view(), name='packitem-index'),
+    path('packitems/<int:pk>/update/', views.PackingItemUpdate.as_view(), name='packing-update'),
+    path('packitems/<int:pk>/delete/', views.PackingItemDelete.as_view(), name='packing-delete'),
 
 ]

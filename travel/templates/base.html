@@ -24,8 +24,14 @@
           {% if user.is_authenticated %}
             <li><a href="{% url 'about' %}">About</a></li>
           
+
             <li><a href="{% url 'trip-index' %}">All Trips</a></li>
+
             <li><a href="{% url 'trip-create' %}">Add a Trip</a></li>
+            <li><a href="{% url 'packitem-create' %}">Add a Packing Item</a></li>
+            <li><a href="{% url 'packitem-index' %}">All Packing Items</a></li>
+
+            
             
           {% else %}
 

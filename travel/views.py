@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
 from django.contrib.auth.views import LoginView
 from .models import Trip, Itinerary, PackingItem
 from .forms import ItineraryForm
@@ -13,7 +14,7 @@ class Home(LoginView):
     template_name = 'home.html'
 
 def about(request):
-     contact_details = 'you can reach support at support@catcollector.com' 
+     contact_details = 'you can reach support at support@explo.com' 
      return render(request, 'about.html', {
         'contact': contact_details
     })
@@ -32,12 +33,15 @@ def trip_index(request):
 
 def trip_detail(request, trip_id):
     trip = Trip.objects.get(id=trip_id)
+    packitems = PackingItem.objects.all()  # Fetch all packitems
+
     itinerary_form = ItineraryForm()
 
     return render(request, 'trips/detail.html', {
         'trip': trip,
         'trip_status': trip.status,
         'itinerary_form': itinerary_form,
+        'packitems': packitems,
     })
 
 def add_itinerary(request, trip_id):
@@ -78,3 +82,20 @@ class ItineraryDelete(DeleteView):
     
     def get_success_url(self):
         return reverse_lazy('trip-detail', kwargs={'trip_id': self.object.trip.id})
+
+class PackItemCreate(CreateView):
+    model = PackingItem
+    fields = '__all__'
+
+class PackingItemList(ListView):
+    model = PackingItem
+
+class PackingItemDetail(DetailView):
+    model = PackingItem
+
+class PackingItemUpdate(UpdateView):
+    model = PackingItem
+    fields = '__all__'
+
+class PackingItemDelete(DeleteView):
+    model = PackingItem

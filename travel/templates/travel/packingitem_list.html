@@ -1,0 +1,37 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/packitems/packitem-index.css' %}" />
+{% endblock %} 
+{% block content %}
+
+<section class="page-header">
+  <h1>All Available Items to Pack</h1>
+  <a href="{% url 'packitem-create' %}" class="add-button">+ Add Packing Item</a>
+  <img src="" alt="" />
+  <img src="" alt="" />
+  <img src="" alt="" />
+  <img src="" alt="" />
+</section>
+
+<section class="card-container">
+  {% if packingitem_list %}
+  {% for item in packingitem_list %}
+    <div class="card">
+      <div class="card-bg"></div>
+      <a href="{% url 'packing-detail' item.id %}">
+        <div class="card-content">
+          <h2>{{ item.quantity }} x {{ item.name }}</h2>
+          <p>{{ item.category }}</p>
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+  {% else %}
+    <p>No packing items have been added yet!</p>
+    <a href="{% url 'packitem-create' %}" class="add-button">+ Add Packing Item</a>
+  {% endif %}
+
+</section>
+
+{% endblock %}

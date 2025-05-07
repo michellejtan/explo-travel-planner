@@ -29,7 +29,8 @@ body {
         'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
         'Helvetica Neue', sans-serif;
     min-height: 100vh;
-    --nav-bg: rgba(104, 197, 248, 0.7);
+    /* --nav-bg: rgba(104, 197, 248, 0.7); */
+    --nav-bg: rgba(138, 154, 91);
     --nav-bg-ff: rgba(104, 197, 248, 0.9);
     --borders: rgb(36, 116, 248) solid 2px;
     --text-color: rgb(17, 20, 17);

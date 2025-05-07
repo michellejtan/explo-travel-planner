@@ -58,6 +58,12 @@ def associate_packitem(request, trip_id, packitem_id):
     Trip.objects.get(id=trip_id).packing_items.add(packitem_id)
     return redirect('trip-detail', trip_id=trip_id)
 
+def remove_packitem(request, trip_id, packitem_id):
+    trip = Trip.objects.get(id=trip_id)
+    packitem = PackingItem.objects.get(id=packitem_id)
+    trip.packing_items.remove(packitem)
+    return redirect('trip-detail', trip_id=trip_id)
+
 class TripCreate(CreateView):
     model = Trip
     fields = ['name', 'destination', 'start_date', 'end_date', 'notes']

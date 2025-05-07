@@ -124,9 +124,11 @@
           {% for item in trip.packing_items.all %}
             <div class="packitem-container">
               <div class="color-block" style="background-color: {{ toy.color }}"></div>
-              <a href="{% url 'trip-detail' item.id %}">
                 <p>{{ item.name }} x {{ item.quantity }}</p>
-              </a>
+              <form action="{% url 'remove-packitem' trip.id item.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Unpacked Item</button>
+              </form>
             </div>
           {% endfor %} 
         {% else %}

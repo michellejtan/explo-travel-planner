@@ -16,7 +16,6 @@
 * start date
 * end date
 * Notes
-* Status (Tried/Want to Try)
 
 - 👥 **User Authentication** with session-based login/logout
 - 📅 Organize and track your travel plans

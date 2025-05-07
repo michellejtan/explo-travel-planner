@@ -10,15 +10,26 @@
 
 - ✏️ **CRUD Support** for trips, itinerary, packing items
 
-- Users are able to input:
-* Trip name
-* Destination
-* start date
-* end date
-* Notes
+- Users are able to input
+    * for trips:
+        * Trip name
+        * Destination
+        * start date
+        * end date
+        * Notes
+    * for itinerary:
+        * date
+        * time
+        * type
+        * activity
+        * address
+        * description
+    * for packing:
+        * name
+        * quantity
 
 - 👥 **User Authentication** with session-based login/logout
-- 📅 Organize and track your travel plans
+- 📅 Organize and track your travel plans,packed items
 - 🔍 View your saved trips (current, past, future)
 
 ## 🛠️ Techstack
@@ -31,8 +42,7 @@
 - **Heroku** (for deployment)
 
 
-## ✅ Future Features
+## Future Features
 
 * 🗺️ Map integration for visualizing trips
-* 📌 Custom tags and categories
 * 🧑‍🤝‍🧑 Friend sharing and collaboration

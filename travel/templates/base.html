@@ -30,11 +30,19 @@
             <li><a href="{% url 'trip-create' %}">Add a Trip</a></li>
             <li><a href="{% url 'packitem-create' %}">Add a Packing Item</a></li>
             <li><a href="{% url 'packitem-index' %}">All Packing Items</a></li>
-
+            <li>
+              <form id="logout-form" method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">Log out</button>
+              </form>
+            </li>
             
             
           {% else %}
+          <li><a href="{% url 'about' %}">About</a></li>
 
+          <li><a href="{% url 'home' %}">Login</a></li>
+          <li><a href="{% url 'signup' %}">Sign Up</a></li>
           {% endif %}
 
         </ul>               

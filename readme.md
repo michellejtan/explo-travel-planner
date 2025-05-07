@@ -9,7 +9,8 @@
 ## 🚀 Features
 
 - ✏️ **CRUD Support** for trips, itinerary, packing items
--Users are able to input:
+
+- Users are able to input:
 * Trip name
 * Destination
 * start date

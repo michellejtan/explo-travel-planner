@@ -152,10 +152,14 @@
 
       <h3>Available/Sugguest Items</h3>
       <div class="subsection-content">
-        {% if availabe_items %}
+        {% if availabe_items|length == 0 %}
+          <p class="no-packitems">{{trip.user.username}} hasn't add anything yet!!!🙄</p>
+        {% else %}
+          {% comment %} {% elif availabe_items %} {% endcomment %}
         {% for item in availabe_items %}
           <div class="packitem-container">
             <div class="color-block" style="background-color: {{ toy.color }}"></div>
+            
             <p>{{ item.name }} x {{ item.quantity }}</p>
 
             <form action="{% url 'associate-packitem' trip.id item.id %}" method="post">
@@ -163,10 +167,10 @@
               <button type="submit" class="btn submit">Packed!</button>
             </form>
           </div>
-        {% endfor %}
-        {% else %}
+        
+        {% empty %}
         <p class="all-packitems">You already packed all the available items {{trip.name}} 🥳</p>
-
+        {% endfor %}
         {% endif %}
       </div>
     </section>

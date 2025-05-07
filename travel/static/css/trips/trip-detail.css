@@ -22,13 +22,18 @@
 
 .trip-actions {
     margin-top: 20px;
+    display: flex;
 }
 
 .itineraries-packitem-container {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     padding-bottom: 20px;
     align-items: center;
+    flex-wrap: wrap;
+    /* allow items to wrap on smaller screens */
+    gap: 20px;
+    justify-content: center;
 }
 
 .subsection-title {
@@ -96,6 +101,7 @@
 
 .itineraries-packitem-container>section {
     width: 80%;
+
     min-width: 360px;
     border: var(--borders);
     border-radius: var(--card-border-radius);
@@ -105,6 +111,15 @@
     flex-direction: column;
     justify-content: center;
     margin-bottom: 20px;
+    flex: 1 1 auto;
+    box-sizing: border-box;
+    overflow-x: auto;
+
+    overflow-wrap: break-word;
+    /* prevent text overflow */
+    align-items: stretch;
+
+
 }
 
 .subsection-title img {

@@ -33,7 +33,7 @@ def trip_index(request):
 
 def trip_detail(request, trip_id):
     trip = Trip.objects.get(id=trip_id)
-    packitems = PackingItem.objects.all()  # Fetch all packitems
+    packitems_trip_doesnt_have = PackingItem.objects.exclude(id__in = trip.packing_items.all().values_list('id'))
 
     itinerary_form = ItineraryForm()
 
@@ -41,7 +41,7 @@ def trip_detail(request, trip_id):
         'trip': trip,
         'trip_status': trip.status,
         'itinerary_form': itinerary_form,
-        'packitems': packitems,
+        'availabe_items': packitems_trip_doesnt_have,
     })
 
 def add_itinerary(request, trip_id):
@@ -53,6 +53,10 @@ def add_itinerary(request, trip_id):
         new_itinerary.save() 
         
     return redirect('trip-detail', trip_id)
+
+def associate_packitem(request, trip_id, packitem_id):
+    Trip.objects.get(id=trip_id).packing_items.add(packitem_id)
+    return redirect('trip-detail', trip_id=trip_id)
 
 class TripCreate(CreateView):
     model = Trip

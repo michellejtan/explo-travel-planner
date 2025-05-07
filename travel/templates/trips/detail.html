@@ -108,6 +108,53 @@
       </div>
     {% endif %}
     </section>
+
+    <section class="packitems">
+      <div class="subsection-title">
+        <h2>Pack Items</h2>
+        <img src="" alt="" />
+        <img src="" alt="" />
+        <img src="" alt="" />
+      </div>
+      
+      
+      <div class="subsection-content">
+        {% if trip.packing_items.count %}
+        <h3>Items already packed 🥳</h3>
+          {% for item in trip.packing_items.all %}
+            <div class="packitem-container">
+              <div class="color-block" style="background-color: {{ toy.color }}"></div>
+              <a href="{% url 'trip-detail' item.id %}">
+                <p>{{ item.name }} x {{ item.quantity }}</p>
+              </a>
+            </div>
+          {% endfor %} 
+        {% else %}
+          <p class="no-packitems">{{trip.user.username}} hasn't packed anything yet!!!🙄</p>
+        {% endif %}
+      </div>
+
+
+      <h3>Available/Sugguest Items</h3>
+      <div class="subsection-content">
+        {% if availabe_items %}
+        {% for item in availabe_items %}
+          <div class="packitem-container">
+            <div class="color-block" style="background-color: {{ toy.color }}"></div>
+            <p>{{ item.name }} x {{ item.quantity }}</p>
+
+            <form action="{% url 'associate-packitem' trip.id item.id %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn submit">Packed!</button>
+            </form>
+          </div>
+        {% endfor %}
+        {% else %}
+        <p class="all-packitems">You already packed all the available items {{trip.name}} 🥳</p>
+
+        {% endif %}
+      </div>
+    </section>
 </div>
 
 

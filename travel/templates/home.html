@@ -11,13 +11,13 @@
 <section class="logo-container">
   <div class="trip-container">
     <img
-      src=""
+      src="{% static 'images/explo-logo.svg' %}"
       alt="Explo The travel planner"
     />
   </div>
   <img
     src=""
-    alt="Text reads: Explo"
+    alt=""
   />
 </section>
 
@@ -25,7 +25,7 @@
 
   <section>
     <form action="{% url 'home' %}" method="post" class="login">
-      <h1>Login</h1>
+      <h1>Sign In</h1>
       {% csrf_token %} {{ form.as_p }}
       <input type="hidden" name="next" value="{{ next }}" />
       <button type="submit" class="btn submit">Login</button>

@@ -1,4 +1,4 @@
-![Explo Logo](/main_app/static/images/explo-logo.svg)
+![Explo Logo](/travel/static/images/explo-logo.svg)
 
 # Explo Travel Planner 🌍✈️
 

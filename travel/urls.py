@@ -23,5 +23,6 @@ urlpatterns = [
     path('packitems/<int:pk>/update/', views.PackingItemUpdate.as_view(), name='packing-update'),
     path('packitems/<int:pk>/delete/', views.PackingItemDelete.as_view(), name='packing-delete'),
     path('trips/<int:trip_id>/associate-packitem/<int:packitem_id>/', views.associate_packitem, name='associate-packitem'),
+    path('trips/<int:trip_id>/remove-packitem/<int:packitem_id>/', views.remove_packitem, name='remove-packitem'),
 
 ]

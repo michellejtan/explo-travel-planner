@@ -8,8 +8,7 @@ from django.contrib.auth.views import LoginView
 from .models import Trip, Itinerary, PackingItem
 from .forms import ItineraryForm
 from datetime import date
-
-
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 class Home(LoginView):
@@ -36,6 +35,7 @@ def about(request):
         'contact': contact_details
     })
 
+@login_required
 def trip_index(request):
     trips = Trip.objects.filter(user=request.user)
     today = date.today()
@@ -48,6 +48,7 @@ def trip_index(request):
         'current_trips': current_trips,
     })
 
+@login_required
 def trip_detail(request, trip_id):
     trip = Trip.objects.get(id=trip_id)
     packitems_trip_doesnt_have = PackingItem.objects.exclude(id__in = trip.packing_items.all().values_list('id'))
@@ -61,6 +62,7 @@ def trip_detail(request, trip_id):
         'availabe_items': packitems_trip_doesnt_have,
     })
 
+@login_required
 def add_itinerary(request, trip_id):
     form = ItineraryForm(request.POST)
     
@@ -71,10 +73,12 @@ def add_itinerary(request, trip_id):
         
     return redirect('trip-detail', trip_id)
 
+@login_required
 def associate_packitem(request, trip_id, packitem_id):
     Trip.objects.get(id=trip_id).packing_items.add(packitem_id)
     return redirect('trip-detail', trip_id=trip_id)
 
+@login_required
 def remove_packitem(request, trip_id, packitem_id):
     trip = Trip.objects.get(id=trip_id)
     packitem = PackingItem.objects.get(id=packitem_id)

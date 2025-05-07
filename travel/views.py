@@ -99,3 +99,5 @@ class PackingItemUpdate(UpdateView):
 
 class PackingItemDelete(DeleteView):
     model = PackingItem
+    success_url = '/packitems/'
+

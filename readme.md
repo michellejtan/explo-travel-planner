@@ -4,7 +4,7 @@
 
 **Explo** is a full-stack Django web application designed to help users plan and organize their travel adventures. With user authentication, destination tracking, and full CRUD functionality, Explo makes it easy to manage your trips in one place.
 
-[Explo Deployment here!](https://django-explo-a9503c630d2d.herokuapp.com//)
+[Explo Deployment here!](https://django-explo-a9503c630d2d.herokuapp.com/)
 
 ## 🚀 Features
 

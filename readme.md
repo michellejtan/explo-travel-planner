@@ -27,6 +27,7 @@
 - **Django**
 - **PostgreSQL**
 - **HTML/CSS**
+- **Javascript**
 - **Heroku** (for deployment)
 
 

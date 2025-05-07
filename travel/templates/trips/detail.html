@@ -140,7 +140,7 @@
                 <p>{{ item.name }} x {{ item.quantity }}</p>
               <form action="{% url 'remove-packitem' trip.id item.id %}" method="post">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-danger">Unpacked Item</button>
+                <button type="submit" class="btn btn-danger">Unpack</button>
               </form>
             </div>
           {% endfor %} 

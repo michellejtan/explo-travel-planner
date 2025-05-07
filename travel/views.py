@@ -9,6 +9,7 @@ from .models import Trip, Itinerary, PackingItem
 from .forms import ItineraryForm
 from datetime import date
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 class Home(LoginView):
@@ -85,7 +86,7 @@ def remove_packitem(request, trip_id, packitem_id):
     trip.packing_items.remove(packitem)
     return redirect('trip-detail', trip_id=trip_id)
 
-class TripCreate(CreateView):
+class TripCreate(LoginRequiredMixin, CreateView):
     model = Trip
     fields = ['name', 'destination', 'start_date', 'end_date', 'notes']
 
@@ -93,42 +94,41 @@ class TripCreate(CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-class TripUpdate(UpdateView):
+class TripUpdate(LoginRequiredMixin, UpdateView):
     model = Trip
     fields = ['name', 'destination', 'start_date', 'end_date', 'notes']
 
-class TripDelete(DeleteView):
+class TripDelete(LoginRequiredMixin, DeleteView):
     model = Trip
     success_url = '/trips/'
 
-class ItineraryUpdate(UpdateView):
+class ItineraryUpdate(LoginRequiredMixin, UpdateView):
     model = Itinerary
     fields = ['date', 'time', 'type', 'activity', 'address', 'description']    
     
     def get_success_url(self):
         return reverse_lazy('trip-detail', kwargs={'trip_id': self.object.trip.id})
     
-class ItineraryDelete(DeleteView):
+class ItineraryDelete(LoginRequiredMixin, DeleteView):
     model = Itinerary
     
     def get_success_url(self):
         return reverse_lazy('trip-detail', kwargs={'trip_id': self.object.trip.id})
 
-class PackItemCreate(CreateView):
+class PackItemCreate(LoginRequiredMixin, CreateView):
     model = PackingItem
     fields = '__all__'
 
-class PackingItemList(ListView):
+class PackingItemList(LoginRequiredMixin, ListView):
     model = PackingItem
 
-class PackingItemDetail(DetailView):
+class PackingItemDetail(LoginRequiredMixin, DetailView):
     model = PackingItem
 
-class PackingItemUpdate(UpdateView):
+class PackingItemUpdate(LoginRequiredMixin, UpdateView):
     model = PackingItem
     fields = '__all__'
 
-class PackingItemDelete(DeleteView):
+class PackingItemDelete(LoginRequiredMixin, DeleteView):
     model = PackingItem
     success_url = '/packitems/'
-

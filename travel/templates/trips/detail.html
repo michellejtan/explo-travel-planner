@@ -1,6 +1,19 @@
 {% extends 'base.html' %} 
 {% load static %} 
 {% block head %}
+<!-- New MCDatepicker CSS -->
+<link 
+  href="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.css" 
+  rel="stylesheet" 
+/>
+<link rel="stylesheet" href="{% static 'css/mcdp.css' %}">
+<!-- MCDatepicker JS -->
+<script 
+  src="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.js"
+>
+</script>
+<script defer src="{% static 'js/trip-detail.js' %}"></script>
+
 <link rel="stylesheet" href="{% static 'css/trips/trip-detail.css' %}" />
 {% endblock %} 
 {% block content %}

@@ -6,7 +6,7 @@ class ItineraryForm(forms.ModelForm):
         model = Itinerary
         fields = ['date', 'time', 'type', 'activity', 'address', 'description']
         widgets = {
-            'date': forms.DateInput(attrs={'type': 'date'}),
+            # 'date': forms.DateInput(attrs={'type': 'date'}),
             'time': forms.TimeInput(attrs={'type': 'time'}),
             'description': forms.Textarea(attrs={'rows': 3}),
         }
